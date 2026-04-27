@@ -1,0 +1,22 @@
+/* Card Container Styles */
+.chartCard, .kpiTile {
+    background-color: #ffffff !important;
+    border: 1px solid #ebedef !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.sapMShellBackground {
+    background-color: #f4f7f9 !important;
+}
+
+/* Ensure Charts have breathing room */
+.chartCard {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Adjust Sidebar width for clarity */
+.sapTntSideNavigation {
+    width: 240px !important;
+}

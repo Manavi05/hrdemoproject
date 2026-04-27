@@ -1,0 +1,53 @@
+{
+  "_version": "1.83.0",
+  "sap.app": {
+    "id": "com.hr.portal",
+    "type": "application",
+    "title": "HR Portal",
+    "applicationVersion": { "version": "1.0.0" }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "com.hr.portal.view.App",
+      "type": "XML",
+      "id": "rootApp",
+      "async": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.tnt": {},
+        "sap.viz": {},
+        "sap.f": {}
+      }
+    },
+    "resources": {
+      "css": [{ "uri": "css/style.css" }]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "com.hr.portal.view",
+        "controlId": "appId",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "TargetDashboard",
+          "pattern": "",
+          "target": "dashboard"
+        }
+      ],
+      "targets": {
+        "dashboard": {
+          "viewName": "Dashboard",
+          "id": "Dashboard"
+        }
+      }
+    }
+  }
+}

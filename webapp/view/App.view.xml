@@ -1,0 +1,38 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt">
+    <Shell id="shell">
+        <tnt:ToolPage id="toolPage">
+            <tnt:header>
+                <tnt:ToolHeader id="_IDGenToolHeader1">
+                    <Button id="_IDGenButton" icon="sap-icon://menu2" type="Transparent" press="onSideNavButtonPress" />
+                    <Title id="_IDGenTitle" text="HR Portal" level="H1" />
+                    <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                    <Text id="_IDGenText" text="Enterprise Edition" />
+                </tnt:ToolHeader>
+            </tnt:header>
+            <tnt:sideContent>
+                <tnt:SideNavigation id="_IDGenSideNavigation">
+                    <tnt:NavigationList id="_IDGenNavigationList" itemSelect="onItemSelect">
+                        <tnt:NavigationListItem id="_IDGenNavigationListItem" text="Dashboard" icon="sap-icon://view-ux" key="dashboard" />
+                        <tnt:NavigationListItem id="_IDGenNavigationListItem1" text="Employees" icon="sap-icon://group" key="employees" />
+                        <tnt:NavigationListItem id="_IDGenNavigationListItem2" text="Attendance" icon="sap-icon://time-entry-request" key="attendance" />
+                        <tnt:NavigationListItem id="_IDGenNavigationListItem3" text="Leave Requests" icon="sap-icon://person-placeholder" key="leaves" />
+                        <tnt:NavigationListItem id="_IDGenNavigationListItem4" text="Documents" icon="sap-icon://document" key="documents" />
+                    </tnt:NavigationList>
+                    <tnt:fixedItem>
+                        <tnt:NavigationList id="_IDGenNavigationList1">
+                            <tnt:NavigationListItem id="_IDGenNavigationListItem5" text="Settings" icon="sap-icon://settings" key="settings" />
+                        </tnt:NavigationList>
+                    </tnt:fixedItem>
+                </tnt:SideNavigation>
+            </tnt:sideContent>
+            <tnt:mainContents>
+                <App id="appId" />
+            </tnt:mainContents>
+        </tnt:ToolPage>
+    </Shell>
+</mvc:View>
