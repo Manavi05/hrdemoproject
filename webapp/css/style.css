@@ -1,22 +1,226 @@
-/* Card Container Styles */
-.chartCard, .kpiTile {
+.dashboardWrapper { width: 100% !important; }
+
+/* KPI Tile Row Fix */
+.kpiTile {
+    width: 24% !important;
+    min-width: 200px !important; /* Prevents squashing into vertical bars */
+    border-radius: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #fff !important;
+}
+
+.kpiActive { border: 2px solid #1a56db !important; }
+
+/* Card Styling */
+.customCard {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding-bottom: 10px;
+}
+
+.approvalSubCard {
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 10px;
+    background: #fafafa;
+}
+
+.approvalBtnRow {
+    margin-top: 12px;
+    gap: 8px; /* Space between the two buttons */
+}
+
+/* FIX FOR BUTTON TRUNCATION */
+.btnFull {
+    width: 48% !important; /* Each button takes up roughly half the row */
+    min-width: 110px !important; /* Crucial: ensures "Approve" label always fits */
+}
+
+.btnFull .sapMBtnInner {
+    border-radius: 8px !important;
+    height: 40px !important;
+    line-height: 38px !important;
+}
+
+.btnFull.sapMBtnAccept .sapMBtnInner {
+    background-color: #059669 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btnRejectOutline .sapMBtnInner {
+    background: #fff !important;
+    color: #dc2626 !important;
+    border: 1.5px solid #dc2626 !important;
+}
+
+/* UI Details */
+.statusBadge { border-radius: 6px !important; padding: 2px 8px !important; }
+.boldText { font-weight: 600; color: #1e293b; font-size: 0.95rem; }
+.subText { color: #64748b; font-size: 0.85rem; }
+
+.btnAddEmployee {
+    background-color: #111827 !important; /* Dark black/gray like image */
+    color: white !important;
+}
+
+.deptBadge {
+    background: #f3f4f6 !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    color: #374151 !important;
+}
+/* Attendance Tile Borders */
+.attendeeTileBlue { border-left: 5px solid #3b82f6 !important; }
+.attendeeTileGreen { border-left: 5px solid #10b981 !important; }
+.attendeeTileOrange { border-left: 5px solid #f59e0b !important; }
+.attendeeTileRed { border-left: 5px solid #ef4444 !important; }
+
+/* Icon Colors within Tiles */
+.attendeeTileBlue .sapUiIcon { color: #3b82f6 !important; }
+.attendeeTileGreen .sapUiIcon { color: #10b981 !important; }
+.attendeeTileOrange .sapUiIcon { color: #f59e0b !important; }
+.attendeeTileRed .sapUiIcon { color: #ef4444 !important; }
+
+/* General table styling for cleaner look */
+.deptBadge {
+    background: #f3f4f6 !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+}
+
+
+/* KPI Cards */
+.kpiCard {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.kpiNumber { font-size: 1.8rem; font-weight: bold; color: #333; }
+.kpiLabel { color: #888; font-size: 0.9rem; }
+
+/* Calendar & Holiday Containers */
+.whiteCardContainer {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.customCalendar {
+    width: 100% !important;
+    border: none !important;
+}
+
+/* List Items */
+.holidayRow {
+    padding: 15px;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.requestCard {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+/* Buttons */
+.blackBtn { background: #1a1a1a !important; color: #fff !important; border-radius: 8px; }
+.btnApprove { background: #e6fcf5 !important; color: #0ca678 !important; border: 1px solid #b2f2bb !important; }
+.btnReject { background: #fff5f5 !important; color: #e03131 !important; border: 1px solid #ffc9c9 !important; }
+
+.statusTab { border-radius: 20px !important; }
+.activeTab { border: 1px solid #339af0 !important; color: #339af0 !important; }
+.reasonLink { color: #339af0; font-style: italic; margin-top: 5px; }
+
+/* Calendar Legend Dots */
+.legendDot { font-size: 1.2rem; }
+.approvedDot { color: #10b981 !important; } /* Green */
+.pendingDot { color: #f59e0b !important; }  /* Orange */
+.holidayDot { color: #ef4444 !important; }  /* Red */
+.legendText { font-size: 0.9rem; color: #4b5563; margin-left: 4px; }
+
+/* Navigation Pills (Pending / All Requests) */
+.navPillBtn {
+    border-radius: 20px !important;
+    height: 36px;
+    padding: 0 1rem;
+    border: 1px solid #e5e7eb !important;
+    color: #4b5563 !important;
+}
+
+.navPillActive {
+    background-color: #f0f7ff !important;
+    border: 1.5px solid #0061f2 !important;
+    color: #0061f2 !important;
+    font-weight: 600;
+}
+
+/* Approve/Reject Buttons */
+.actionBtn {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    padding: 0 10px !important;
+}
+
+.approveAction {
+    background-color: #059669 !important; /* Solid Green */
+    color: white !important;
+    border: none !important;
+}
+
+.rejectAction {
+    background-color: transparent !important;
+    color: #dc2626 !important; /* Red Text */
+    border: 1px solid #dc2626 !important;
+}
+
+.approveAction:hover { background-color: #047857 !important; }
+.rejectAction:hover { background-color: #fef2f2 !important; }
+
+/* Quote Text */
+.reasonQuote {
+    color: #3b82f6;
+    font-style: italic;
+    margin-top: 4px;
+    font-size: 0.85rem;
+}
+
+/* Badge for Notification Bell */
+.notificationBell {
+    position: relative;
+}
+
+.notificationBell[data-badge]::after {
+    content: attr(data-badge);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #ef4444; /* Red Badge */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+}
+
+/* ToolHeader Styling */
+.sapTntToolHeader {
     background-color: #ffffff !important;
-    border: 1px solid #ebedef !important;
-    border-radius: 0.75rem !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 1px solid #e5e7eb !important;
 }
 
-.sapMShellBackground {
-    background-color: #f4f7f9 !important;
-}
-
-/* Ensure Charts have breathing room */
-.chartCard {
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-/* Adjust Sidebar width for clarity */
-.sapTntSideNavigation {
-    width: 240px !important;
+.sapTntToolHeader .sapMTitle {
+    color: #111827 !important;
+    font-weight: bold;
 }

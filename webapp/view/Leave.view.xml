@@ -1,0 +1,121 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.Leave"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout">
+    <Page title="Leave Requests" backgroundDesign="Transparent" showHeader="false">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Leave Requests" level="H1" titleStyle="H3" class="mainHeaderTitle" />
+                        <Text text="Manage employee leave applications" class="subText" />
+                    </VBox>
+                    <Button text="New Leave Request" icon="sap-icon://appointment-2" type="Emphasized" class="blackBtn" />
+                </HBox>
+
+                <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBottom">
+                    <VBox class="kpiCard kpiOrange" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <VBox>
+                                <Text text="12" class="kpiNumber" />
+                                <Text text="Pending Requests" class="kpiLabel" />
+                            </VBox>
+                            <core:Icon src="sap-icon://history" size="2rem" color="#E67E22" class="kpiIconBg" />
+                        </HBox>
+                    </VBox>
+                    <VBox class="kpiCard kpiGreen" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <VBox>
+                                <Text text="28" class="kpiNumber" />
+                                <Text text="Approved This Month" class="kpiLabel" />
+                            </VBox>
+                            <core:Icon src="sap-icon://accept" size="2rem" color="#27AE60" class="kpiIconBg" />
+                        </HBox>
+                    </VBox>
+                    <VBox class="kpiCard kpiRed" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <VBox>
+                                <Text text="3" class="kpiNumber" />
+                                <Text text="Rejected This Month" class="kpiLabel" />
+                            </VBox>
+                            <core:Icon src="sap-icon://decline" size="2rem" color="#C0392B" class="kpiIconBg" />
+                        </HBox>
+                    </VBox>
+                    <VBox class="kpiCard kpiBlue" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <VBox>
+                                <Text text="5" class="kpiNumber" />
+                                <Text text="Upcoming Holidays" class="kpiLabel" />
+                            </VBox>
+                            <core:Icon src="sap-icon://calendar" size="2rem" color="#2980B9" class="kpiIconBg" />
+                        </HBox>
+                    </VBox>
+                </HBox>
+
+                <HBox gap="2rem" class="sapUiMediumMarginBottom" alignItems="Stretch">
+                    <VBox width="65%" class="whiteCardContainer">
+                        <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMargin">
+                            <Title text="Leave Calendar" level="H2" titleStyle="H4" />
+                            <HBox alignItems="Center">
+                                <Button icon="sap-icon://navigation-left-arrow" type="Transparent" />
+                                <Text text="April 2026" class="sapUiSmallMarginBeginEnd boldText" />
+                                <Button icon="sap-icon://navigation-right-arrow" type="Transparent" />
+                            </HBox>
+                        </HBox>
+                        <unified:Calendar id="calendar" class="customCalendar" />
+                        <HBox class="sapUiSmallMargin" gap="1rem">
+                            <HBox alignItems="Center"><core:Icon src="sap-icon://primitive-dot" color="#27AE60" /><Text text="Approved Leave" class="sapUiTinyMarginBegin" /></HBox>
+                            <HBox alignItems="Center"><core:Icon src="sap-icon://primitive-dot" color="#E67E22" /><Text text="Pending" class="sapUiTinyMarginBegin" /></HBox>
+                            <HBox alignItems="Center"><core:Icon src="sap-icon://primitive-dot" color="#C0392B" /><Text text="Holiday" class="sapUiTinyMarginBegin" /></HBox>
+                        </HBox>
+                    </VBox>
+
+                    <VBox width="35%" class="whiteCardContainer">
+                        <Title text="Upcoming Holidays" level="H2" titleStyle="H4" class="sapUiSmallMargin" />
+                        <List items="{/Holidays}" separators="None">
+                            <CustomListItem>
+                                <HBox justifyContent="SpaceBetween" class="holidayRow">
+                                    <Text text="{HolidayName}" class="boldText" />
+                                    <Text text="{Date}" class="subText" />
+                                </HBox>
+                            </CustomListItem>
+                        </List>
+                    </VBox>
+                </HBox>
+
+                <Title text="Leave Requests" level="H2" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                <HBox gap="10px" class="sapUiSmallMarginBottom">
+                    <Button text="Pending" class="statusTab activeTab" />
+                    <Button text="All Requests" type="Transparent" />
+                </HBox>
+                
+                <List items="{/LeaveRequests}" separators="None">
+                    <CustomListItem>
+                        <HBox class="requestCard sapUiSmallMarginBottom" justifyContent="SpaceBetween" alignItems="Center">
+                            <HBox alignItems="Center">
+                                <Avatar src="{Photo}" displaySize="S" class="sapUiSmallMarginEnd" />
+                                <VBox>
+                                    <HBox alignItems="Center">
+                                        <Text text="{Name}" class="boldText sapUiTinyMarginEnd" />
+                                        <ObjectStatus text="{Type}" state="{State}" inverted="true" />
+                                    </HBox>
+                                    <Text text="{DateRange}" class="subText" />
+                                    <Text text="&quot;{Reason}&quot;" class="reasonLink" />
+                                </VBox>
+                            </HBox>
+                            <HBox gap="0.5rem">
+                                <Button text="Approve" class="btnApprove" />
+                                <Button text="Reject" class="btnReject" />
+                            </HBox>
+                        </HBox>
+                    </CustomListItem>
+                </List>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

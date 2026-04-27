@@ -3,8 +3,20 @@
   "sap.app": {
     "id": "com.hr.portal",
     "type": "application",
-    "title": "HR Portal",
-    "applicationVersion": { "version": "1.0.0" }
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
   },
   "sap.ui5": {
     "rootView": {
@@ -23,8 +35,24 @@
         "sap.f": {}
       }
     },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.hr.portal.i18n.i18n"
+        }
+      }
+    },
     "resources": {
-      "css": [{ "uri": "css/style.css" }]
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
     },
     "routing": {
       "config": {
@@ -33,19 +61,56 @@
         "viewPath": "com.hr.portal.view",
         "controlId": "appId",
         "controlAggregation": "pages",
+        "transition": "slide",
         "async": true
       },
       "routes": [
         {
-          "name": "TargetDashboard",
+          "name": "RouteDashboard",
           "pattern": "",
-          "target": "dashboard"
+          "target": "TargetDashboard"
+        },
+        {
+          "name": "RouteEmployees",
+          "pattern": "employees",
+          "target": "TargetEmployees"
+        },
+        {
+          "name": "RouteAttendance",
+          "pattern": "attendance",
+          "target": "TargetAttendance"
+        },
+        {
+          "name": "RouteLeaves",
+          "pattern": "leave",
+          "target": "TargetLeaves"
+        },
+        {
+          "name": "RouteDocuments",
+          "pattern": "documents",
+          "target": "TargetDocuments"
         }
       ],
       "targets": {
-        "dashboard": {
+        "TargetDashboard": {
           "viewName": "Dashboard",
-          "id": "Dashboard"
+          "viewLevel": 1
+        },
+        "TargetEmployees": {
+          "viewName": "Employees",
+          "viewLevel": 2
+        },
+        "TargetAttendance": {
+          "viewName": "Attendance",
+          "viewLevel": 3
+        },
+        "TargetLeaves": {
+          "viewName": "Leave",
+          "viewLevel": 4
+        },
+        "TargetDocuments": {
+          "viewName": "Documents",
+          "viewLevel": 5
         }
       }
     }

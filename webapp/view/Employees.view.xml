@@ -1,0 +1,57 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.Employees"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page title="Employee Directory" backgroundDesign="Transparent" showHeader="false">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Employee Directory" level="H1" titleStyle="H3" />
+                        <Text text="Manage your organization's workforce" class="subText" />
+                    </VBox>
+                    <HBox gap="10px">
+                        <Button text="Bulk Upload" icon="sap-icon://upload" />
+                        <Button text="Add Employee" icon="sap-icon://add" type="Emphasized" class="btnAddEmployee" />
+                    </HBox>
+                </HBox>
+
+                <VBox class="customCard sapUiSmallMarginBottom" style="padding: 1rem;">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center">
+                        <SearchField placeholder="Search by name, ID, or email..." width="400px" />
+                        <Select width="200px">
+                            <core:Item key="all" text="All Departments" />
+                        </Select>
+                    </HBox>
+                </VBox>
+
+                <Table items="{/Employees}" class="customCard">
+                    <columns>
+                        <Column><Text text="ID" /></Column>
+                        <Column><Text text="Employee" /></Column>
+                        <Column><Text text="Role" /></Column>
+                        <Column><Text text="Department" /></Column>
+                        <Column><Text text="Status" /></Column>
+                        <Column hAlign="End"><Text text="" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <Text text="{ID}" class="boldText" />
+                                <HBox alignItems="Center">
+                                    <Avatar src="{Icon}" displaySize="XS" class="sapUiTinyMarginEnd" />
+                                    <Text text="{Name}" class="boldText" />
+                                </HBox>
+                                <Text text="{Role}" class="subText" />
+                                <ObjectStatus text="{Dept}" class="deptBadge" />
+                                <ObjectStatus text="{Status}" state="{State}" inverted="true" class="statusBadge" />
+                                <Button icon="sap-icon://overflow" type="Transparent" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,90 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.Documents"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f">
+    <Page title="Document Management" backgroundDesign="Transparent" showHeader="false">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Employee Documents" level="H1" titleStyle="H3" class="mainHeaderTitle" />
+                        <Text text="Review and download employee records and certifications" class="subText" />
+                    </VBox>
+                    <Button text="Upload New Document" icon="sap-icon://upload" type="Emphasized" class="blueActionBtn" />
+                </HBox>
+
+                <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBottom">
+                    <VBox class="kpiCard" width="31%">
+                        <Text text="156" class="kpiNumber" />
+                        <Text text="Total Documents" class="kpiLabel" />
+                    </VBox>
+                    <VBox class="kpiCard" width="31%">
+                        <Text text="12" class="kpiNumber" />
+                        <Text text="Pending Review" class="kpiLabel" />
+                    </VBox>
+                    <VBox class="kpiCard" width="31%">
+                        <Text text="4" class="kpiNumber" />
+                        <Text text="Expired/Missing" class="kpiLabel" />
+                    </VBox>
+                </HBox>
+
+                <VBox class="whiteSectionCard sapUiContentPadding sapUiSmallMarginBottom">
+                    <HBox gap="1rem" alignItems="Center">
+                        <SearchField 
+                            placeholder="Search by employee name..." 
+                            width="400px" 
+                            liveChange=".onSearch" />
+                        <Select width="200px">
+                            <core:Item text="All Document Types" />
+                            <core:Item text="Identity Proof" />
+                            <core:Item text="Education" />
+                            <core:Item text="Certifications" />
+                        </Select>
+                        <Button icon="sap-icon://filter" type="Transparent" text="Filters" />
+                    </HBox>
+                </VBox>
+
+                <VBox class="whiteSectionCard">
+                    <Table id="docsTable" items="{/EmployeeDocs}" sticky="HeaderToolbar,ColumnHeaders">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="Document Repository" level="H2" />
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://excel-attachment" type="Transparent" />
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column width="250px"><Text text="Employee" /></Column>
+                            <Column><Text text="Document Name" /></Column>
+                            <Column><Text text="Category" /></Column>
+                            <Column><Text text="Upload Date" /></Column>
+                            <Column><Text text="Status" /></Column>
+                            <Column hAlign="End"><Text text="Actions" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem vAlign="Middle">
+                                <cells>
+                                    <HBox alignItems="Center">
+                                        <Avatar src="{Photo}" displaySize="XS" class="sapUiTinyMarginEnd" />
+                                        <Text text="{EmployeeName}" class="boldText" />
+                                    </HBox>
+                                    <Text text="{DocName}" />
+                                    <ObjectStatus text="{Category}" />
+                                    <Text text="{UploadDate}" />
+                                    <ObjectStatus text="{Status}" state="{State}" inverted="true" />
+                                    <HBox justifyContent="End" gap="0.5rem">
+                                        <Button icon="sap-icon://download" type="Transparent" tooltip="Download" />
+                                        <Button icon="sap-icon://inspect" type="Transparent" tooltip="Review" />
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
