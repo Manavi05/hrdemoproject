@@ -8,7 +8,7 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("com.hr.portal.controller.App", {
-        
+
         onSideNavButtonPress: function () {
             var oToolPage = this.byId("toolPage");
             oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
@@ -21,9 +21,19 @@ sap.ui.define([
             oRouter.navTo(sKey);
         },
 
-        /**
-         * Handles showing the notifications popover
-         */
+        onLogout: function () {
+            var oRouter = this.getOwnerComponent().getRouter();
+            var oRoleModel = this.getOwnerComponent().getModel("roleModel");
+
+            if (oRoleModel) {
+                // Clear role flags to hide UI elements
+                oRoleModel.setProperty("/isHR", false);
+                oRoleModel.setProperty("/isEmployee", false);
+            }
+
+            oRouter.navTo("RouteLogin");
+        },
+
         onNotificationPress: function (oEvent) {
             var oButton = oEvent.getSource();
 
@@ -45,19 +55,12 @@ sap.ui.define([
                                 description: "Alex Rivera uploaded Passport Copy",
                                 icon: "sap-icon://doc-attachment",
                                 type: "Navigation"
-                            }),
-                            new StandardListItem({
-                                title: "Missing Attendance",
-                                description: "4 employees haven't clocked in",
-                                icon: "sap-icon://time-entry-request",
-                                type: "Navigation"
                             })
                         ]
                     })
                 });
                 this.getView().addDependent(this._oPopover);
             }
-
             this._oPopover.openBy(oButton);
         }
     });

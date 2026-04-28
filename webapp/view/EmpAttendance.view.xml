@@ -1,0 +1,66 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.EmpAttendance"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page showHeader="false" backgroundDesign="Transparent">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <VBox class="sapUiSmallMarginBottom">
+                    <Title text="My Attendance" level="H1" titleStyle="H3" />
+                    <Text text="View your personal work hours and leave status" class="subText" />
+                </VBox>
+
+                <HBox gap="1.5rem" class="sapUiMediumMarginBottom" justifyContent="Start">
+                    <VBox width="230px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="Present" class="subTextSmall" />
+                        <Title text="{/Stats/Present}" titleStyle="H1" class="statusPresentColor" />
+                    </VBox>
+
+                    <VBox width="230px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="Absent" class="subTextSmall" />
+                        <Title text="{/Stats/Absent}" titleStyle="H1" class="statusAbsentColor" />
+                    </VBox>
+
+                    <VBox width="230px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="Late" class="subTextSmall" />
+                        <Title text="{/Stats/Late}" titleStyle="H1" class="statusLateColor" />
+                    </VBox>
+
+                    <VBox width="230px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="Half Day" class="subTextSmall" />
+                        <Title text="{/Stats/HalfDay}" titleStyle="H1" class="statusHalfDayColor" />
+                    </VBox>
+                </HBox>
+
+                <VBox class="whiteSectionCard sapUiContentPadding">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                        <Title text="Attendance History" titleStyle="H4" />
+                        <DatePicker value="{/CurrentDate}" width="200px" displayFormat="dd-MM-yyyy" />
+                    </HBox>
+
+                    <Table items="{/PersonalRecords}" sticky="ColumnHeaders">
+                        <columns>
+                            <Column><Text text="Date" /></Column>
+                            <Column hAlign="Center"><Text text="Status" /></Column>
+                            <Column hAlign="Center"><Text text="Check In" /></Column>
+                            <Column hAlign="Center"><Text text="Check Out" /></Column>
+                            <Column><Text text="Total Hours" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{Date}" />
+                                    <ObjectStatus text="{Status}" state="{= ${Status} === 'Present' ? 'Success' : 'Warning' }" />
+                                    <Text text="{CheckIn}" />
+                                    <Text text="{CheckOut}" />
+                                    <Text text="{TotalHours}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

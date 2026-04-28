@@ -1,0 +1,92 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.EmployeeDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:layout="sap.ui.layout">
+    <Page showHeader="false" backgroundDesign="Transparent">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Welcome back, Employee!" level="H1" titleStyle="H3" class="mainHeaderTitle" />
+                        <Text text="Your work overview and statistics" class="subText" />
+                    </VBox>
+                    <HBox alignItems="Center">
+                        <VBox alignItems="End" class="sapUiSmallMarginEnd">
+                            <Text text="Riya Kedar" class="boldText" />
+                            <Text text="Software Engineer" class="subTextSmall" />
+                        </VBox>
+                        <Avatar src="https://randomuser.me/api/portraits/women/12.jpg" displaySize="S" />
+                    </HBox>
+                </HBox>
+
+                <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBottom">
+                    <VBox class="kpiCard" width="19%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Text text="Completed Tasks" class="kpiLabelSmall" />
+                            <core:Icon xmlns:core="sap.ui.core" src="sap-icon://accept" color="#10b981" />
+                        </HBox>
+                        <Text text="12" class="kpiNumberSmall" />
+                    </VBox>
+                    <VBox class="kpiCard" width="19%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Text text="In Progress" class="kpiLabelSmall" />
+                            <core:Icon xmlns:core="sap.ui.core" src="sap-icon:// f-t-i" color="#3b82f6" />
+                        </HBox>
+                        <Text text="4" class="kpiNumberSmall" />
+                    </VBox>
+                    <VBox class="kpiCard" width="19%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Text text="Approved Leaves" class="kpiLabelSmall" />
+                            <core:Icon xmlns:core="sap.ui.core" src="sap-icon://calendar" color="#10b981" />
+                        </HBox>
+                        <Text text="8" class="kpiNumberSmall" />
+                    </VBox>
+                    <VBox class="kpiCard" width="19%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Text text="Pending Leaves" class="kpiLabelSmall" />
+                            <core:Icon xmlns:core="sap.ui.core" src="sap-icon://history" color="#f59e0b" />
+                        </HBox>
+                        <Text text="2" class="kpiNumberSmall" />
+                    </VBox>
+                    <VBox class="kpiCard" width="19%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Text text="Perf. Rating" class="kpiLabelSmall" />
+                            <core:Icon xmlns:core="sap.ui.core" src="sap-icon://favorite" color="#8b5cf6" />
+                        </HBox>
+                        <Text text="4.8/5" class="kpiNumberSmall" />
+                    </VBox>
+                </HBox>
+
+                <HBox gap="1.5rem" class="sapUiMediumMarginBottom">
+                    <VBox width="50%" class="whiteSectionCard sapUiContentPadding">
+                        <Title text="Leave Balance Overview" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                        <viz:VizFrame id="leaveVizFrame" vizType="donut" width="100%" height="300px" />
+                    </VBox>
+
+                    <VBox width="50%" class="whiteSectionCard sapUiContentPadding">
+                        <Title text="Weekly Working Hours" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                        <viz:VizFrame id="hoursVizFrame" vizType="column" width="100%" height="300px" />
+                    </VBox>
+                </HBox>
+
+                <VBox class="whiteSectionCard sapUiContentPadding">
+                    <Title text="My Recent Tasks" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                    <List items="{/RecentTasks}" separators="None">
+                        <CustomListItem>
+                            <HBox justifyContent="SpaceBetween" alignItems="Center" class="holidayItemRow">
+                                <VBox>
+                                    <Text text="{TaskName}" class="boldText" />
+                                    <Text text="{Deadline}" class="subTextSmall" />
+                                </VBox>
+                                <ObjectStatus text="{Priority}" state="{State}" inverted="true" />
+                            </HBox>
+                        </CustomListItem>
+                    </List>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

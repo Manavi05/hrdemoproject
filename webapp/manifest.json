@@ -32,7 +32,8 @@
         "sap.ui.core": {},
         "sap.tnt": {},
         "sap.viz": {},
-        "sap.f": {}
+        "sap.f": {},
+        "sap.ui.unified": {}
       }
     },
     "contentDensities": {
@@ -66,8 +67,13 @@
       },
       "routes": [
         {
-          "name": "RouteDashboard",
+          "name": "RouteLogin",
           "pattern": "",
+          "target": "TargetLogin"
+        },
+        {
+          "name": "RouteDashboard",
+          "pattern": "dashboard",
           "target": "TargetDashboard"
         },
         {
@@ -89,9 +95,38 @@
           "name": "RouteDocuments",
           "pattern": "documents",
           "target": "TargetDocuments"
-        }
+        },
+        {
+          "name": "RouteEmployeeDashboard",
+          "pattern": "employee-portal",
+          "target": "TargetEmployeeDashboard"
+        },
+        {
+        "name": "RouteProfile",
+        "pattern": "employee/profile",
+        "target": "TargetProfile"
+       },
+       {
+        "name": "RouteAttendance",
+        "pattern": "empattendance",
+        "target": "TargetAttendance"
+      },
+       {
+        "name": "RouteTasks",
+        "pattern": "tasks",
+        "target": "TargetTasks"
+      },
+      {
+        "name": "RouteDocuments",
+        "pattern": "empdocuments",
+        "target": "TargetDocuments"
+      }
       ],
       "targets": {
+        "TargetLogin": {
+          "viewName": "Login",
+          "viewLevel": 0
+        },
         "TargetDashboard": {
           "viewName": "Dashboard",
           "viewLevel": 1
@@ -111,7 +146,27 @@
         "TargetDocuments": {
           "viewName": "Documents",
           "viewLevel": 5
-        }
+        },
+        "TargetEmployeeDashboard": {
+          "viewName": "EmployeeDashboard",
+          "viewLevel": 1
+        },
+        "TargetProfile": {
+        "viewName": "Profile",
+        "viewLevel": 2
+        },
+        "TargetAttendance": {
+        "viewName": "EmpAttendance",
+        "viewLevel": 3
+       },
+       "TargetTasks": {
+        "viewName": "EmpTasks",
+        "viewLevel": 4
+       },
+       "TargetDocuments": {
+        "viewName": "EmpDocuments",
+        "viewLevel": 5
+      }
       }
     }
   }

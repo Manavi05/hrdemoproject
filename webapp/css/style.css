@@ -1,3 +1,37 @@
+.loginContainer {
+    height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.loginCard {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid #f1f5f9;
+}
+
+.loginIcon {
+    background-color: #3b82f6 !important;
+    color: white !important;
+}
+
+.loginBtn {
+    height: 44px !important;
+    background-color: #111827 !important; /* Matches your black buttons */
+    border: none !important;
+    border-radius: 8px !important;
+}
+
+.boldText {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.subText {
+    color: #64748b;
+}
+
 .dashboardWrapper { width: 100% !important; }
 
 /* KPI Tile Row Fix */
@@ -223,4 +257,107 @@
 .sapTntToolHeader .sapMTitle {
     color: #111827 !important;
     font-weight: bold;
+}
+
+.kpiLabelSmall {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.kpiNumberSmall {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 5px;
+}
+
+/* Ensure chart containers are clean */
+.whiteSectionCard .sapVizFrame {
+    background-color: transparent !important;
+}
+
+.holidayItemRow {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.infoFieldGroup {
+    background-color: #f8fafc;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.roleBadge {
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.whiteSectionCard {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.statusPresentColor { color: #10b981 !important; font-weight: bold; } 
+.statusAbsentColor { color: #ef4444 !important; font-weight: bold; }  
+.statusLateColor { color: #f59e0b !important; font-weight: bold; }    
+.statusHalfDayColor { color: #1e293b !important; font-weight: bold; } 
+
+.subTextSmall { 
+    color: #64748b; 
+    font-size: 0.875rem; 
+    margin-bottom: 0.5rem; 
+    display: block;
+}
+
+/* Task Status Tile Colors */
+.statusTodoColor { 
+    color: #64748b !important; /* Grey */
+    font-weight: bold; 
+}
+
+.statusProgressColor { 
+    color: #3b82f6 !important; /* Blue */
+    font-weight: bold; 
+}
+
+.statusCompletedColor { 
+    color: #10b981 !important; /* Green */
+    font-weight: bold; 
+}
+
+/* Common Card Styling */
+.whiteSectionCard {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.subTextSmall {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.boldText {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.whiteSectionCard {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.boldText {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.subText {
+    color: #64748b;
 }

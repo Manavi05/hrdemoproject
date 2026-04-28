@@ -1,0 +1,106 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.Profile"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout">
+    <Page showHeader="false" backgroundDesign="Transparent">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="My Profile" level="H1" titleStyle="H3" class="mainHeaderTitle" />
+                        <Text text="View and manage your profile information" class="subText" />
+                    </VBox>
+                </HBox>
+
+                <HBox gap="1.5rem" alignItems="Stretch" class="sapUiMediumMarginBottom">
+                    <VBox width="30%" class="whiteSectionCard sapUiContentPadding" alignItems="Center" justifyContent="Center">
+                        <Avatar src="{/Personal/Photo}" displaySize="XL" class="sapUiMediumMarginBottom" />
+                        <Title text="{/Personal/FullName}" level="H2" class="boldText" />
+                        <Text text="{/Personal/Email}" class="subText sapUiSmallMarginBottom" />
+                        <ObjectStatus text="Employee" state="None" inverted="true" class="roleBadge" />
+                    </VBox>
+
+                    <VBox width="70%" class="whiteSectionCard sapUiContentPadding">
+                        <Title text="Personal Information" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                        
+                        <VBox class="infoFieldGroup sapUiSmallMarginBottom">
+                            <HBox alignItems="Center">
+                                <core:Icon xmlns:core="sap.ui.core" src="sap-icon://email" class="sapUiSmallMarginEnd" />
+                                <VBox>
+                                    <Label text="Email" class="subTextSmall" />
+                                    <Text text="{/Personal/Email}" class="boldText" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <VBox class="infoFieldGroup sapUiSmallMarginBottom">
+                            <HBox alignItems="Center">
+                                <core:Icon xmlns:core="sap.ui.core" src="sap-icon://business-card" class="sapUiSmallMarginEnd" />
+                                <VBox>
+                                    <Label text="Position" class="subTextSmall" />
+                                    <Text text="{/Personal/Position}" class="boldText" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <VBox class="infoFieldGroup">
+                            <HBox alignItems="Center">
+                                <core:Icon xmlns:core="sap.ui.core" src="sap-icon://building" class="sapUiSmallMarginEnd" />
+                                <VBox>
+                                    <Label text="Department" class="subTextSmall" />
+                                    <Text text="{/Personal/Department}" class="boldText" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <HBox gap="1.5rem">
+                    <VBox width="33%" class="whiteSectionCard sapUiContentPadding">
+                        <Title text="Leave Statistics" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                        <VBox class="sapUiSmallMarginBottom">
+                            <Label text="Total Leave Requests" />
+                            <Title text="{/Stats/TotalLeaves}" titleStyle="H3" />
+                        </VBox>
+                        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                            <Text text="Approved" />
+                            <Text text="{/Stats/Approved}" class="statusSuccessText" />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                            <Text text="Pending" />
+                            <Text text="{/Stats/Pending}" class="statusWarningText" />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Text text="Rejected" />
+                            <Text text="{/Stats/Rejected}" class="statusErrorText" />
+                        </HBox>
+                    </VBox>
+
+                    <VBox width="33%" class="whiteSectionCard sapUiContentPadding">
+                        <Title text="Performance" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                        <Label text="Total Ratings" />
+                        <Title text="{/Stats/PerformanceRatings}" titleStyle="H3" />
+                    </VBox>
+
+                    <VBox width="33%" class="whiteSectionCard sapUiContentPadding">
+                        <Title text="Account Status" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                        <VBox class="sapUiSmallMarginBottom">
+                            <Label text="Role" />
+                            <Text text="Employee" class="boldText" />
+                        </VBox>
+                        <VBox class="sapUiSmallMarginBottom">
+                            <Label text="Status" />
+                            <ObjectStatus text="Active" state="Success" inverted="true" />
+                        </VBox>
+                        <VBox>
+                            <Label text="Member Since" />
+                            <Text text="{/Personal/JoinDate}" />
+                        </VBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

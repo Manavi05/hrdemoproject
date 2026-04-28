@@ -1,0 +1,71 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.EmpTasks"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page showHeader="false" backgroundDesign="Transparent">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <VBox class="sapUiSmallMarginBottom">
+                    <Title text="Tasks" level="H1" titleStyle="H3" />
+                    <Text text="Your tasks and assignments" class="subText" />
+                </VBox>
+
+                <HBox gap="1.5rem" class="sapUiMediumMarginBottom" justifyContent="Start">
+                    <VBox width="280px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="To Do" class="subTextSmall" />
+                        <Title text="{/Stats/ToDo}" titleStyle="H1" class="statusTodoColor" />
+                    </VBox>
+
+                    <VBox width="280px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="In Progress" class="subTextSmall" />
+                        <Title text="{/Stats/InProgress}" titleStyle="H1" class="statusProgressColor" />
+                    </VBox>
+
+                    <VBox width="280px" class="whiteSectionCard sapUiContentPadding">
+                        <Text text="Completed" class="subTextSmall" />
+                        <Title text="{/Stats/Completed}" titleStyle="H1" class="statusCompletedColor" />
+                    </VBox>
+                </HBox>
+
+                <VBox class="whiteSectionCard sapUiContentPadding">
+                    <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                        <Label text="Filter by status:" class="sapUiSmallMarginEnd" />
+                        <Select id="statusFilter" change="onFilterTasks" width="200px">
+                            <core:Item key="All" text="All Tasks" />
+                            <core:Item key="To Do" text="To Do" />
+                            <core:Item key="In Progress" text="In Progress" />
+                            <core:Item key="Completed" text="Completed" />
+                        </Select>
+                    </HBox>
+
+                    <Table id="tasksTable" items="{/TaskList}" noDataText="No tasks found">
+                        <columns>
+                            <Column><Text text="Task Name" /></Column>
+                            <Column hAlign="Center"><Text text="Priority" /></Column>
+                            <Column hAlign="Center"><Text text="Status" /></Column>
+                            <Column hAlign="Center"><Text text="Due Date" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <VBox>
+                                        <Text text="{Title}" class="boldText" />
+                                        <Text text="{Description}" class="subTextSmall" />
+                                    </VBox>
+                                    <ObjectStatus 
+                                        text="{Priority}" 
+                                        state="{= ${Priority} === 'High' ? 'Error' : 'None' }" />
+                                    <ObjectStatus 
+                                        text="{Status}" 
+                                        state="{= ${Status} === 'Completed' ? 'Success' : (${Status} === 'In Progress' ? 'Information' : 'None') }" />
+                                    <Text text="{DueDate}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

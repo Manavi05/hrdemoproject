@@ -6,41 +6,59 @@
     xmlns:tnt="sap.tnt"
     xmlns:core="sap.ui.core">
     <Shell id="shell">
-        <tnt:ToolPage id="toolPage">
+        <tnt:ToolPage id="toolPage" 
+                      sideExpanded="true" 
+                      sideNavVisible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }">
             <tnt:header>
-                <tnt:ToolHeader id="_IDGenToolHeader1">
-                    <Button id="_IDGenButton" icon="sap-icon://menu2" type="Transparent" press="onSideNavButtonPress" />
-                    <Title id="_IDGenTitle" text="HR Portal" level="H1" />
-                    <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                <tnt:ToolHeader>
+                    <Button icon="sap-icon://menu2" 
+                            type="Transparent" 
+                            press="onSideNavButtonPress" 
+                            visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }" />
                     
-                    <Button 
-                        id="notificationBtn"
-                        icon="sap-icon://bell" 
-                        type="Transparent" 
-                        press=".onNotificationPress"
-                        class="notificationBell">
+                    <Title text="HR Portal" level="H1" />
+                    <ToolbarSpacer />
+                    
+                    <Button icon="sap-icon://bell" 
+                            type="Transparent" 
+                            press=".onNotificationPress"
+                            visible="{roleModel>/isHR}">
                         <customData>
                             <core:CustomData key="badge" value="3" writeToDom="true" />
                         </customData>
                     </Button>
 
-                    <Avatar 
-                        src="https://randomuser.me/api/portraits/men/32.jpg" 
-                        displaySize="XS" 
-                        class="sapUiSmallMarginBeginEnd" />
+                    <Avatar src="https://randomuser.me/api/portraits/women/12.jpg" 
+                            displaySize="XS" 
+                            visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }" />
+                    <Button icon="sap-icon://log" 
+                            type="Transparent" 
+                            press="onLogout" 
+                            tooltip="Logout" 
+                            visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }" />
                 </tnt:ToolHeader>
             </tnt:header>
+            
             <tnt:sideContent>
-                <tnt:SideNavigation id="_IDGenSideNavigation">
-                    <tnt:NavigationList id="_IDGenNavigationList" itemSelect="onItemSelect">
-                        <tnt:NavigationListItem text="Dashboard" icon="sap-icon://grid" key="RouteDashboard" />
-                        <tnt:NavigationListItem text="Employees" icon="sap-icon://group" key="RouteEmployees" />
-                        <tnt:NavigationListItem text="Attendance" icon="sap-icon://time-entry-request" key="RouteAttendance" />
-                        <tnt:NavigationListItem text="Leave Requests" icon="sap-icon://person-placeholder" key="RouteLeaves" /> 
-                        <tnt:NavigationListItem text="Documents" icon="sap-icon://document" key="RouteDocuments" />
+                <tnt:SideNavigation visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }">
+                    <tnt:NavigationList itemSelect="onItemSelect">
+                        
+                        <tnt:NavigationListItem text="Dashboard" icon="sap-icon://grid" key="RouteDashboard" visible="{roleModel>/isHR}" />
+                        <tnt:NavigationListItem text="Employees" icon="sap-icon://group" key="RouteEmployees" visible="{roleModel>/isHR}" />
+                        <tnt:NavigationListItem text="Attendance" icon="sap-icon://time-entry-request" key="RouteAttendance" visible="{roleModel>/isHR}" />
+                        <tnt:NavigationListItem text="Leave Requests" icon="sap-icon://person-placeholder" key="RouteLeaves" visible="{roleModel>/isHR}" />
+                        <tnt:NavigationListItem text="Documents" icon="sap-icon://document" key="RouteDocuments" visible="{roleModel>/isHR}" />
+
+                        <tnt:NavigationListItem text="My Dashboard" icon="sap-icon://grid" key="RouteEmployeeDashboard" visible="{roleModel>/isEmployee}" />
+                        <tnt:NavigationListItem text="My Profile" icon="sap-icon://employee-lookup" key="RouteProfile" visible="{roleModel>/isEmployee}" />
+                        <tnt:NavigationListItem text="Attendance" icon="sap-icon://time-entry-request" key="RouteAttendance" visible="{roleModel>/isEmployee}" />
+                        <tnt:NavigationListItem text="My Tasks" icon="sap-icon://task" key="RouteTasks" visible="{roleModel>/isEmployee}" />
+                        <tnt:NavigationListItem text="My Documents" icon="sap-icon://upload-to-cloud" key="RouteDocuments" visible="{roleModel>/isEmployee}" />
+
                     </tnt:NavigationList>
                 </tnt:SideNavigation>
             </tnt:sideContent>
+            
             <tnt:mainContents>
                 <App id="appId" />
             </tnt:mainContents>

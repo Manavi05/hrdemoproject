@@ -1,0 +1,67 @@
+<mvc:View
+    controllerName="com.hr.portal.controller.EmpDocuments"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core">
+    <Page showHeader="false" backgroundDesign="Transparent">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <VBox class="sapUiSmallMarginBottom">
+                    <Title text="My Documents" level="H1" titleStyle="H3" />
+                    <Text text="Manage and upload your personal documents" class="subText" />
+                </VBox>
+
+                <VBox class="whiteSectionCard sapUiContentPadding sapUiMediumMarginBottom">
+                    <Title text="Upload New Document" titleStyle="H4" class="sapUiSmallMarginBottom" />
+                    <HBox gap="1rem" alignItems="Center">
+                        <u:FileUploader 
+                            id="fileUploader"
+                            width="400px"
+                            tooltip="Upload your document"
+                            placeholder="Choose a file..."
+                            buttonText="Browse" />
+                        <Button text="Upload" type="Emphasized" icon="sap-icon://upload" press="onUpload" />
+                    </HBox>
+                </VBox>
+
+                <VBox class="whiteSectionCard sapUiContentPadding">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                        <Title text="Available Documents" titleStyle="H4" />
+                        <SearchField 
+                            placeholder="Search documents..." 
+                            width="300px" 
+                            search="onSearch" />
+                    </HBox>
+
+                    <Table id="docsTable" items="{/Documents}">
+                        <columns>
+                            <Column><Text text="Document Name" /></Column>
+                            <Column><Text text="Category" /></Column>
+                            <Column hAlign="Center"><Text text="Upload Date" /></Column>
+                            <Column hAlign="Center"><Text text="Size" /></Column>
+                            <Column hAlign="End"><Text text="Actions" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <HBox alignItems="Center">
+                                        <core:Icon src="{icon}" class="sapUiTinyMarginEnd" color="#3b82f6" />
+                                        <Text text="{fileName}" class="boldText" />
+                                    </HBox>
+                                    <Text text="{category}" />
+                                    <Text text="{uploadDate}" />
+                                    <Text text="{size}" />
+                                    <HBox justifyContent="End">
+                                        <Button icon="sap-icon://show" type="Transparent" tooltip="View" press="onView" />
+                                        <Button icon="sap-icon://download" type="Transparent" tooltip="Download" press="onDownload" />
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
