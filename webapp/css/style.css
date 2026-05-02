@@ -361,3 +361,37 @@
 .subText {
     color: #64748b;
 }
+
+
+
+/* Bold IDs and Names */
+.customTable .sapMText {
+    font-weight: 500;
+}
+
+/* Add subtle padding to the table rows */
+.customTable .sapMListTblRow {
+    height: 3rem;
+}
+
+/* Style the status indicators to look like badges */
+.sapMObjStatusInverted.sapMObjStatusSuccess {
+    background-color: #2b7d2b !important;
+}
+
+.sapMObjStatusInverted.sapMObjStatusWarning {
+    background-color: #e9730c !important;
+}
+
+.kpiCard {
+    background-color: #ffffff;
+    border: 1px solid #dbe2e8; /* Makes the border visible */
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Adds subtle depth */
+    transition: transform 0.2s;
+}
+
+.kpiCard:hover {
+    border-color: #3b82f6; /* Optional: highlights on hover */
+}

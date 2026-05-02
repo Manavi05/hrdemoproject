@@ -6,11 +6,16 @@
     <Page showHeader="false" backgroundDesign="Transparent">
         <content>
             <VBox class="sapUiMediumMargin">
-                <VBox class="sapUiSmallMarginBottom">
-                    <Title text="Tasks" level="H1" titleStyle="H3" />
-                    <Text text="Your tasks and assignments" class="subText" />
-                </VBox>
+                <!-- Header with Add Button -->
+                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                    <VBox>
+                        <Title text="Tasks" level="H1" titleStyle="H3" />
+                        <Text text="Your tasks and assignments" class="subText" />
+                    </VBox>
+                    <Button text="Add Task" icon="sap-icon://add" type="Emphasized" press="onOpenTaskDialog" />
+                </HBox>
 
+                <!-- KPI Tiles -->
                 <HBox gap="1.5rem" class="sapUiMediumMarginBottom" justifyContent="Start">
                     <VBox width="280px" class="whiteSectionCard sapUiContentPadding">
                         <Text text="To Do" class="subTextSmall" />
@@ -28,6 +33,7 @@
                     </VBox>
                 </HBox>
 
+                <!-- Task Table Card -->
                 <VBox class="whiteSectionCard sapUiContentPadding">
                     <HBox alignItems="Center" class="sapUiSmallMarginBottom">
                         <Label text="Filter by status:" class="sapUiSmallMarginEnd" />
@@ -45,6 +51,7 @@
                             <Column hAlign="Center"><Text text="Priority" /></Column>
                             <Column hAlign="Center"><Text text="Status" /></Column>
                             <Column hAlign="Center"><Text text="Due Date" /></Column>
+                            <Column width="3rem" hAlign="Center"></Column>
                         </columns>
                         <items>
                             <ColumnListItem>
@@ -60,6 +67,7 @@
                                         text="{Status}" 
                                         state="{= ${Status} === 'Completed' ? 'Success' : (${Status} === 'In Progress' ? 'Information' : 'None') }" />
                                     <Text text="{DueDate}" />
+                                    <Button icon="sap-icon://edit" type="Transparent" press="onEditTask" />
                                 </cells>
                             </ColumnListItem>
                         </items>

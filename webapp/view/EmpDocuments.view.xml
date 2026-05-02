@@ -34,24 +34,23 @@
                             search="onSearch" />
                     </HBox>
 
-                    <Table id="docsTable" items="{/Documents}">
+                    <Table id="docsTable" items="{/DocumentsSet}">
                         <columns>
                             <Column><Text text="Document Name" /></Column>
                             <Column><Text text="Category" /></Column>
                             <Column hAlign="Center"><Text text="Upload Date" /></Column>
-                            <Column hAlign="Center"><Text text="Size" /></Column>
+                            <!-- Size Column Removed -->
                             <Column hAlign="End"><Text text="Actions" /></Column>
                         </columns>
                         <items>
-                            <ColumnListItem>
+                            <ColumnListItem vAlign="Middle">
                                 <cells>
                                     <HBox alignItems="Center">
-                                        <core:Icon src="{icon}" class="sapUiTinyMarginEnd" color="#3b82f6" />
-                                        <Text text="{fileName}" class="boldText" />
+                                        <core:Icon src="sap-icon://attachment" class="sapUiTinyMarginEnd" color="#3b82f6" />
+                                        <Text text="{DOC_NAME}" class="boldText" />
                                     </HBox>
-                                    <Text text="{category}" />
-                                    <Text text="{uploadDate}" />
-                                    <Text text="{size}" />
+                                    <Text text="{CATEGORY}" />
+                                    <Text text="{UPLOAD_DATE}" />
                                     <HBox justifyContent="End">
                                         <Button icon="sap-icon://show" type="Transparent" tooltip="View" press="onView" />
                                         <Button icon="sap-icon://download" type="Transparent" tooltip="Download" press="onDownload" />

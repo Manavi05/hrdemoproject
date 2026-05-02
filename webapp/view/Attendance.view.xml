@@ -2,91 +2,93 @@
     controllerName="com.hr.portal.controller.Attendance"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:layout="sap.ui.layout">
-    <Page title="Attendance Monitoring" backgroundDesign="Transparent" showHeader="false">
+    xmlns:core="sap.ui.core">
+    <Page showHeader="false" backgroundDesign="Transparent">
         <content>
             <VBox class="sapUiMediumMargin">
+                <!-- Header Section -->
                 <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
                     <VBox>
                         <Title text="Attendance Monitoring" level="H1" titleStyle="H3" />
-                        <Text text="Track daily attendance and work hours" />
+                        <Text text="Track daily attendance and work hours" class="subText" />
                     </VBox>
-                    <HBox>
-                        <Button text="Generate Report" icon="sap-icon://excel-attachment" class="sapUiSmallMarginEnd" />
-                        <Button text="Filters" icon="sap-icon://filter" />
-                    </HBox>
+                    <Button text="Generate Report" icon="sap-icon://manager-insight" type="Ghost" press="onGenerateReport" />
                 </HBox>
 
-                <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
-                    <GenericTile header="247" subheader="Total Employees">
-                        <TileContent>
-                            <core:Icon src="sap-icon://clock-dot-in" size="1.5rem" color="Default" />
-                        </TileContent>
-                    </GenericTile>
-                    <GenericTile header="198" subheader="On Time Today">
-                        <TileContent>
-                            <core:Icon src="sap-icon://accept" size="1.5rem" color="Positive" />
-                        </TileContent>
-                    </GenericTile>
-                    <GenericTile header="12" subheader="Late Arrivals">
-                        <TileContent>
-                            <core:Icon src="sap-icon://alert" size="1.5rem" color="Critical" />
-                        </TileContent>
-                    </GenericTile>
-                    <GenericTile header="8" subheader="Absent">
-                        <TileContent>
-                            <core:Icon src="sap-icon://decline" size="1.5rem" color="Negative" />
-                        </TileContent>
-                    </GenericTile>
+                <!-- KPI Tiles -->
+                <HBox justifyContent="SpaceBetween" class="sapUiMediumMarginBottom">
+                    <VBox class="kpiCard" width="23%">
+                        <Title text="{/Stats/Total}" titleStyle="H4" />
+                        <Text text="Total Employees" />
+                    </VBox>
+                    <VBox class="kpiCard" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Title text="{/Stats/OnTime}" titleStyle="H4" />
+                            <core:Icon src="sap-icon://accept" color="Positive" />
+                        </HBox>
+                        <Text text="On Time Today" />
+                    </VBox>
+                    <VBox class="kpiCard" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Title text="{/Stats/Late}" titleStyle="H4" />
+                            <core:Icon src="sap-icon://alert" color="Critical" />
+                        </HBox>
+                        <Text text="Late Arrivals" />
+                    </VBox>
+                    <VBox class="kpiCard" width="23%">
+                        <HBox justifyContent="SpaceBetween">
+                            <Title text="{/Stats/Absent}" titleStyle="H4" />
+                            <core:Icon src="sap-icon://decline" color="Negative" />
+                        </HBox>
+                        <Text text="Absent" />
+                    </VBox>
                 </HBox>
 
-                <VBox class="sapUiSmallMarginBottom">
-                    <HBox>
-                        <SearchField placeholder="Search employees..." width="400px" class="sapUiSmallMarginEnd" />
-                        <Select width="150px" class="sapUiSmallMarginEnd">
-                            <core:Item text="All Status" />
-                        </Select>
-                        <Select width="180px">
-                            <core:Item text="All Departments" />
-                        </Select>
-                    </HBox>
+                <!-- Search Bar Only -->
+                <VBox class="whiteSectionCard sapUiContentPadding sapUiSmallMarginBottom">
+                    <SearchField placeholder="Search employees..." width="400px" liveChange="onSearch" />
                 </VBox>
 
-                <Table items="{/AttendanceData}">
-                    <headerToolbar>
-                        <OverflowToolbar>
-                            <Title text="Today's Attendance" level="H2" />
-                            <ToolbarSpacer />
-                            <Text text="Monday, April 27, 2026" />
-                        </OverflowToolbar>
-                    </headerToolbar>
-                    <columns>
-                        <Column><Text text="Employee" /></Column>
-                        <Column><Text text="Department" /></Column>
-                        <Column><Text text="Check In" /></Column>
-                        <Column><Text text="Check Out" /></Column>
-                        <Column><Text text="Work Hours" /></Column>
-                        <Column><Text text="Status" /></Column>
-                        <Column hAlign="End" width="50px"></Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem vAlign="Middle">
-                            <cells>
-                                <HBox alignItems="Center">
-                                    <Avatar src="{Icon}" displaySize="XS" class="sapUiTinyMarginEnd" />
-                                    <Text text="{Name}" />
-                                </HBox>
-                                <ObjectStatus text="{Dept}" />
-                                <Text text="{CheckIn}" />
-                                <Text text="{CheckOut}" />
-                                <Text text="{Hours}" />
-                                <ObjectStatus text="{Status}" state="{State}" inverted="true" icon="{StatusIcon}" />
-                                <Button icon="sap-icon://overflow" type="Transparent" />
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                <!-- Attendance Table -->
+                <VBox class="whiteSectionCard">
+                    <Table id="attendanceTable" items="{/Attendance}">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="Today's Attendance" level="H2" />
+                                <ToolbarSpacer />
+                                <Text text="Monday, April 27, 2026" />
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="ID" /></Column>
+                            <Column><Text text="Employee" /></Column>
+                            <Column><Text text="Department" /></Column>
+                            <Column><Text text="Check In" /></Column>
+                            <Column><Text text="Check Out" /></Column>
+                            <Column><Text text="Work Hours" /></Column>
+                            <Column><Text text="Status" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem vAlign="Middle">
+                                <cells>
+                                    <Text text="{ID}" />
+                                    <HBox alignItems="Center">
+                                        <Avatar displaySize="XS" class="sapUiTinyMarginEnd" />
+                                        <Text text="{Name}" />
+                                    </HBox>
+                                    <Text text="{Dept}" />
+                                    <Text text="{CheckIn}" />
+                                    <Text text="{CheckOut}" />
+                                    <Text text="{WorkHours}" />
+                                    <ObjectStatus 
+                                        text="{Status}" 
+                                        state="{= ${Status} === 'On Time' ? 'Success' : (${Status} === 'Late' ? 'Warning' : 'Error') }"
+                                        inverted="true" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
             </VBox>
         </content>
     </Page>

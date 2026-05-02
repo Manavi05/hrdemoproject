@@ -7,14 +7,13 @@
     xmlns:core="sap.ui.core">
     <Shell id="shell">
         <tnt:ToolPage id="toolPage" 
-                      sideExpanded="true" 
-                      sideNavVisible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }">
+                      sideExpanded="{= ${roleModel>/isHR} === true || ${roleModel>/isEmployee} === true }">
             <tnt:header>
                 <tnt:ToolHeader>
                     <Button icon="sap-icon://menu2" 
                             type="Transparent" 
                             press="onSideNavButtonPress" 
-                            visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }" />
+                            visible="{= ${roleModel>/isHR} === true || ${roleModel>/isEmployee} === true }" />
                     
                     <Title text="HR Portal" level="H1" />
                     <ToolbarSpacer />
@@ -30,17 +29,17 @@
 
                     <Avatar src="https://randomuser.me/api/portraits/women/12.jpg" 
                             displaySize="XS" 
-                            visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }" />
+                            visible="{= ${roleModel>/isHR} === true || ${roleModel>/isEmployee} === true }" />
                     <Button icon="sap-icon://log" 
                             type="Transparent" 
                             press="onLogout" 
                             tooltip="Logout" 
-                            visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }" />
+                            visible="{= ${roleModel>/isHR} === true || ${roleModel>/isEmployee} === true }" />
                 </tnt:ToolHeader>
             </tnt:header>
             
             <tnt:sideContent>
-                <tnt:SideNavigation visible="{= ${roleModel>/isHR} || ${roleModel>/isEmployee} }">
+                <tnt:SideNavigation visible="{= ${roleModel>/isHR} === true || ${roleModel>/isEmployee} === true }">
                     <tnt:NavigationList itemSelect="onItemSelect">
                         
                         <tnt:NavigationListItem text="Dashboard" icon="sap-icon://grid" key="RouteDashboard" visible="{roleModel>/isHR}" />
@@ -51,9 +50,9 @@
 
                         <tnt:NavigationListItem text="My Dashboard" icon="sap-icon://grid" key="RouteEmployeeDashboard" visible="{roleModel>/isEmployee}" />
                         <tnt:NavigationListItem text="My Profile" icon="sap-icon://employee-lookup" key="RouteProfile" visible="{roleModel>/isEmployee}" />
-                        <tnt:NavigationListItem text="Attendance" icon="sap-icon://time-entry-request" key="RouteAttendance" visible="{roleModel>/isEmployee}" />
+                        <tnt:NavigationListItem text="Attendance" icon="sap-icon://time-entry-request" key="RouteEmpAttendance" visible="{roleModel>/isEmployee}" />
                         <tnt:NavigationListItem text="My Tasks" icon="sap-icon://task" key="RouteTasks" visible="{roleModel>/isEmployee}" />
-                        <tnt:NavigationListItem text="My Documents" icon="sap-icon://upload-to-cloud" key="RouteDocuments" visible="{roleModel>/isEmployee}" />
+                        <tnt:NavigationListItem text="My Documents" icon="sap-icon://upload-to-cloud" key="RouteEmpDocuments" visible="{roleModel>/isEmployee}" />
 
                     </tnt:NavigationList>
                 </tnt:SideNavigation>

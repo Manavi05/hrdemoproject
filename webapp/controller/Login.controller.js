@@ -14,27 +14,48 @@ sap.ui.define([
             var oView = this.getView();
             var sUsername = oView.byId("usernameInput").getValue();
             var sPassword = oView.byId("passwordInput").getValue();
-            var sRole = oView.byId("roleSelector").getSelectedKey();
+            var oUsernameInput = oView.byId("usernameInput");
 
+            // 1. Check if fields are empty
             if (!sUsername || !sPassword) {
-                MessageToast.show("Please enter both username and password");
+                MessageToast.show("Please fill the fields");
                 return;
             }
 
-            // Create a global model to store role information
-            var oRoleModel = new JSONModel({
-                isHR: (sRole === "HR"),
-                isEmployee: (sRole === "EMP")
-            });
-            // Setting the model on the Component makes it accessible to App.view.xml
-            this.getOwnerComponent().setModel(oRoleModel, "roleModel");
+            // 2. Username Validation: Exactly 8 characters, must contain both letters and numbers
+            // Regex explanation: ^(?=.*[a-zA-Z])(?=.*[0-9]).{8}$
+            // ^...$ (Start and end), (?=.*[a-zA-Z]) (has letters), (?=.*[0-9]) (has numbers), .{8} (exactly 8 chars)
+            var nameRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8}$/;
+            if (!nameRegex.test(sUsername)) {
+                oUsernameInput.setValueState("Error");
+                oUsernameInput.setValueStateText("Username must be 8 characters with letters and numbers");
+                MessageToast.show("Invalid Username format");
+                return;
+            } else {
+                oUsernameInput.setValueState("None");
+            }
 
             var oRouter = this.getOwnerComponent().getRouter();
 
-            if (sRole === "HR") {
+            // 3. Password-based Redirection Logic
+            if (sPassword === "hr@admin") {
+                // Set HR Role Model
+                var oRoleModel = new JSONModel({
+                    isHR: true,
+                    isEmployee: false
+                });
+                this.getOwnerComponent().setModel(oRoleModel, "roleModel");
+
                 MessageToast.show("Welcome back, HR Admin");
                 oRouter.navTo("RouteDashboard"); 
             } else {
+                // Set Employee Role Model
+                var oRoleModel = new JSONModel({
+                    isHR: false,
+                    isEmployee: true
+                });
+                this.getOwnerComponent().setModel(oRoleModel, "roleModel");
+
                 MessageToast.show("Welcome, " + sUsername);
                 oRouter.navTo("RouteEmployeeDashboard");
             }

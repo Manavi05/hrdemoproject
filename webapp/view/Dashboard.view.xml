@@ -2,90 +2,124 @@
     controllerName="com.hr.portal.controller.Dashboard"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core"
     xmlns:layout="sap.ui.layout"
-    xmlns:viz="sap.viz.ui5.controls">
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
     <Page title="HR Overview" backgroundDesign="Transparent" showHeader="false">
         <content>
-            <VBox width="100%" class="dashboardWrapper">
-                <VBox class="sapUiMediumMargin">
-                    <Title text="Welcome back! Here's your HR overview." class="sapUiSmallMarginBottom" />
+            <VBox width="100%" class="sapUiSmallMargin">
+                <Title text="HR Management Dashboard" class="sapUiMediumMarginBottom" />
 
-                    <HBox width="100%" justifyContent="SpaceBetween" class="kpiContainer sapUiSmallMarginBottom">
-                        <GenericTile header="Pending Leaves" subheader="+3 from yesterday" class="kpiTile kpiActive">
-                            <TileContent footer="12"><ImageContent src="sap-icon://calendar" color="Critical"/></TileContent>
-                        </GenericTile>
-                        <GenericTile header="Total Headcount" subheader="+5 this month" class="kpiTile">
-                            <TileContent footer="247"><ImageContent src="sap-icon://group" /></TileContent>
-                        </GenericTile>
-                        <GenericTile header="Attendance Alerts" subheader="-2 from yesterday" class="kpiTile">
-                            <TileContent footer="5"><ImageContent src="sap-icon://alert" color="Negative"/></TileContent>
-                        </GenericTile>
-                        <GenericTile header="Completed Reviews" subheader="+12% this quarter" class="kpiTile">
-                            <TileContent footer="89%"><ImageContent src="sap-icon://sys-enter-2" color="Positive"/></TileContent>
-                        </GenericTile>
-                    </HBox>
+                <!-- KPI Tiles -->
+                <HBox width="100%" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+                    <GenericTile header="Pending Leaves" subheader="Action Required">
+                        <TileContent footer="{dashLocal>/PendingCount}">
+                            <ImageContent src="sap-icon://calendar" />
+                        </TileContent>
+                    </GenericTile>
+                    <GenericTile header="Total Headcount" subheader="Active Employees">
+                        <TileContent footer="{dashLocal>/TotalHeadcount}">
+                            <ImageContent src="sap-icon://group" />
+                        </TileContent>
+                    </GenericTile>
+                    <GenericTile header="Attendance Alerts" subheader="Late/Absent Today">
+                        <TileContent footer="{dashLocal>/AttendanceAlerts}">
+                            <ImageContent src="sap-icon://alert" />
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
 
-                    <layout:Grid defaultSpan="L12 M12 S12" hSpacing="1" vSpacing="0">
-                        <VBox>
-                            <layoutData><layout:GridData span="L8 M12 S12" /></layoutData>
-                            
-                            <VBox class="customCard sapUiSmallMarginBottom">
-                                <Title text="Recent Activity" class="sapUiSmallMargin" />
-                                <List items="{/Activities}" separators="None">
-                                    <CustomListItem>
-                                        <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMargin">
-                                            <HBox alignItems="Center">
-                                                <Avatar src="{Icon}" displaySize="S" class="sapUiSmallMarginEnd" />
-                                                <VBox>
-                                                    <Text text="{User} {Action}" class="boldText" />
-                                                    <Text text="{Time}" class="subText" />
-                                                </VBox>
-                                            </HBox>
-                                            <ObjectStatus text="{Status}" state="{State}" inverted="true" class="statusBadge" />
-                                        </HBox>
-                                    </CustomListItem>
-                                </List>
-                            </VBox>
-
-                            <HBox justifyContent="SpaceBetween" width="100%">
-                                <VBox width="49%" class="customCard">
-                                    <Title text="Employee Distribution" class="sapUiSmallMargin" />
-                                    <viz:VizFrame id="idPieChart" vizType="pie" width="100%" height="350px" />
-                                </VBox>
-                                <VBox width="49%" class="customCard">
-                                    <Title text="Monthly Leave Trend" class="sapUiSmallMargin" />
-                                    <viz:VizFrame id="idLineChart" vizType="line" width="100%" height="350px" />
-                                </VBox>
-                            </HBox>
-                        </VBox>
-
-                        <VBox class="customCard">
-                            <layoutData><layout:GridData span="L4 M12 S12" /></layoutData>
-                            <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMargin">
-                                <Title text="Pending Approvals" />
-                                <ObjectStatus text="4 pending" state="Warning" inverted="true" />
-                            </HBox>
-                            <List items="{/Approvals}" separators="None">
+                <layout:Grid defaultSpan="L12 M12 S12" hSpacing="1" vSpacing="0">
+                    <VBox>
+                        <layoutData><layout:GridData span="L8 M12 S12" /></layoutData>
+                        
+                        <!-- Recent Activity List (Absent/Late) -->
+                        <VBox class="sapUiSmallMarginBottom" style="background: white; border-radius: 8px; border: 1px solid #ddd;">
+                            <Title text="Recent Activity (Late/Absent)" class="sapUiSmallMargin" />
+                            <List items="{dashLocal>/AttendanceList}" noDataText="No critical attendance issues">
                                 <CustomListItem>
-                                    <VBox class="approvalSubCard">
-                                        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
-                                            <Avatar src="{Icon}" displaySize="S" class="sapUiSmallMarginEnd" />
+                                    <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMargin">
+                                        <HBox alignItems="Center">
+                                            <Avatar src="sap-icon://person-placeholder" displaySize="S" class="sapUiSmallMarginEnd" />
                                             <VBox>
-                                                <Text text="{User}" class="boldText" />
-                                                <Text text="{Type} • {Days}" class="subText" />
+                                                <Text text="{dashLocal>EmpName}" style="font-weight: bold;" />
+                                                <Text text="Date: {dashLocal>Date}" />
                                             </VBox>
                                         </HBox>
-                                        <HBox width="100%" justifyContent="SpaceBetween" class="approvalBtnRow">
-                                            <Button text="Approve" type="Accept" class="btnFull" />
-                                            <Button text="Reject" type="Reject" class="btnFull btnRejectOutline" />
-                                        </HBox>
-                                    </VBox>
+                                        <ObjectStatus text="{dashLocal>Status}" state="Error" />
+                                    </HBox>
                                 </CustomListItem>
                             </List>
                         </VBox>
-                    </layout:Grid>
-                </VBox>
+
+                        <HBox justifyContent="SpaceBetween" width="100%">
+                            <!-- 1. Dept Distribution (Pie) -->
+                            <VBox style="background: white; padding: 1rem; border-radius: 8px;">
+                        <Title text="Employee Distribution by Department" class="sapUiTinyMarginBottom" />
+                        <viz:VizFrame vizType="pie" width="100%" height="300px">
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{dashLocal>/DeptDistribution}">
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="Dept" value="{dashLocal>Dept}" />
+                                    </viz.data:dimensions>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="Count" value="{dashLocal>Count}" />
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+                            <viz:feeds>
+                                <viz.feeds:FeedItem uid="size" type="Measure" values="Count" />
+                                <viz.feeds:FeedItem uid="color" type="Dimension" values="Dept" />
+                            </viz:feeds>
+                        </viz:VizFrame>
+                    </VBox>
+                            <!-- 2. Leave Trend (Line) -->
+                            <VBox style="background: white; padding: 1rem; border-radius: 8px;">
+                        <Title text="Monthly Leave Requests" class="sapUiTinyMarginBottom" />
+                        <viz:VizFrame id="idBarChart" vizType="column" width="100%" height="300px"
+    vizProperties="{ 
+        'plotArea': { 'dataLabel': { 'visible': true } },
+        'valueAxis': { 'title': { 'visible': false }, 'label': { 'formatString': '0' } },
+        'categoryAxis': { 'title': { 'visible': false } }
+    }">
+    <viz:dataset>
+        <viz.data:FlattenedDataset data="{dashLocal>/MonthlyLeaveTrend}">
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition name="Month" value="{dashLocal>Month}" />
+            </viz.data:dimensions>
+            <viz.data:measures>
+                <viz.data:MeasureDefinition name="Requests" value="{dashLocal>Count}" />
+            </viz.data:measures>
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+    <viz:feeds>
+        <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Requests" />
+        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
+    </viz:feeds>
+</viz:VizFrame>
+                    </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Pending Approvals Sidebar -->
+                    <VBox style="background: white; border-radius: 8px; border: 1px solid #ddd;">
+                        <layoutData><layout:GridData span="L4 M12 S12" /></layoutData>
+                        <Title text="Pending Approvals" class="sapUiSmallMargin" />
+                        <List items="{path: 'leaveModel>/LeaveRequests', filters: [{path: 'Status', operator: 'EQ', value1: 'Pending'}]}">
+                            <CustomListItem>
+                                <VBox class="sapUiSmallMargin">
+                                    <Text text="{leaveModel>EmpName}" style="font-weight: bold;" />
+                                    <Text text="{leaveModel>LeaveType}: {leaveModel>LeaveReason}" />
+                                    <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTop">
+                                        <Button text="Approve" type="Accept" />
+                                        <Button text="Reject" type="Reject" />
+                                    </HBox>
+                                </VBox>
+                            </CustomListItem>
+                        </List>
+                    </VBox>
+                </layout:Grid>
             </VBox>
         </content>
     </Page>

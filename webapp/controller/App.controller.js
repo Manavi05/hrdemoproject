@@ -1,11 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/ResponsivePopover",
-    "sap/m/List",
-    "sap/m/StandardListItem",
-    "sap/m/PlacementType"
-], function (Controller, ResponsivePopover, List, StandardListItem, PlacementType) {
+    "sap/m/library" // Import the library instead of the pseudo-module
+], function (Controller, mobileLibrary) {
     "use strict";
+
+    // Shortcut for the placement type
+    var PlacementType = mobileLibrary.PlacementType;
 
     return Controller.extend("com.hr.portal.controller.App", {
 

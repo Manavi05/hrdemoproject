@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+    <Dialog title="{dialogModel>/title}" contentWidth="450px">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" columnsL="1" columnsM="1">
+                <f:content>
+                    <Label text="Employee ID" required="true" />
+                    <Input id="newEmpId" editable="{= !${dialogModel>/isEdit}}" placeholder="e.g. EMP001" />
+
+                    <Label text="Full Name" required="true" />
+                    <Input id="newEmpName" placeholder="John Doe" />
+
+                    <Label text="Email" required="true" />
+                    <Input id="newEmail" type="Email" placeholder="john.doe@company.com" />
+
+                    <Label text="Role" />
+                    <Input id="newRole" placeholder="Developer" />
+
+                    <Label text="Department" />
+                    <Select id="newDepartment">
+                        <core:Item key="Engineering" text="Engineering" />
+                        <core:Item key="HR" text="Human Resources" />
+                        <core:Item key="Sales" text="Sales" />
+                    </Select>
+
+                    <Label text="Status" />
+                    <Select id="newStatus">
+                        <core:Item key="Active" text="Active" />
+                        <core:Item key="On Leave" text="On Leave" />
+                        <core:Item key="Inactive" text="Inactive" />
+                    </Select>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <buttons>
+            <Button text="Delete" type="Reject" icon="sap-icon://delete" 
+                    visible="{dialogModel>/isEdit}" press="onDeleteEmployee" />
+            <Button text="Save" type="Emphasized" press="onSaveEmployee" />
+            <Button text="Cancel" press="onCloseDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

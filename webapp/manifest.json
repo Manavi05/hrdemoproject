@@ -4,18 +4,23 @@
     "id": "com.hr.portal",
     "type": "application",
     "i18n": "i18n/i18n.properties",
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "applicationVersion": {
-      "version": "1.0.0"
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZPROJECT_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      },
+      "leaveDataSource": {
+        "uri": "/sap/opu/odata4/sap/zhr_serv_bind_lr/srvd/sap/zhr_serv_def_lr/0001/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0",
+          "localUri": "localService/metadata_leave.xml"
+        }
+      }
     }
   },
   "sap.ui5": {
@@ -31,14 +36,10 @@
         "sap.m": {},
         "sap.ui.core": {},
         "sap.tnt": {},
-        "sap.viz": {},
         "sap.f": {},
-        "sap.ui.unified": {}
+        "sap.viz": {},
+        "sap.ui.layout": {}
       }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
     },
     "models": {
       "i18n": {
@@ -46,14 +47,24 @@
         "settings": {
           "bundleName": "com.hr.portal.i18n.i18n"
         }
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
+      },
+      "": {
+        "dataSource": "mainService",
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true
         }
-      ]
+      },
+      "leaveModel": {
+        "dataSource": "leaveDataSource",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
     },
     "routing": {
       "config": {
@@ -62,111 +73,33 @@
         "viewPath": "com.hr.portal.view",
         "controlId": "appId",
         "controlAggregation": "pages",
-        "transition": "slide",
         "async": true
       },
       "routes": [
-        {
-          "name": "RouteLogin",
-          "pattern": "",
-          "target": "TargetLogin"
-        },
-        {
-          "name": "RouteDashboard",
-          "pattern": "dashboard",
-          "target": "TargetDashboard"
-        },
-        {
-          "name": "RouteEmployees",
-          "pattern": "employees",
-          "target": "TargetEmployees"
-        },
-        {
-          "name": "RouteAttendance",
-          "pattern": "attendance",
-          "target": "TargetAttendance"
-        },
-        {
-          "name": "RouteLeaves",
-          "pattern": "leave",
-          "target": "TargetLeaves"
-        },
-        {
-          "name": "RouteDocuments",
-          "pattern": "documents",
-          "target": "TargetDocuments"
-        },
-        {
-          "name": "RouteEmployeeDashboard",
-          "pattern": "employee-portal",
-          "target": "TargetEmployeeDashboard"
-        },
-        {
-        "name": "RouteProfile",
-        "pattern": "employee/profile",
-        "target": "TargetProfile"
-       },
-       {
-        "name": "RouteAttendance",
-        "pattern": "empattendance",
-        "target": "TargetAttendance"
-      },
-       {
-        "name": "RouteTasks",
-        "pattern": "tasks",
-        "target": "TargetTasks"
-      },
-      {
-        "name": "RouteDocuments",
-        "pattern": "empdocuments",
-        "target": "TargetDocuments"
-      }
+        { "name": "RouteLogin", "pattern": "", "target": "TargetLogin" },
+        { "name": "RouteDashboard", "pattern": "dashboard", "target": "TargetDashboard" },
+        { "name": "RouteEmployees", "pattern": "employees", "target": "TargetEmployees" },
+        { "name": "RouteAttendance", "pattern": "attendance", "target": "TargetAttendance" },
+        { "name": "RouteLeaves", "pattern": "leave", "target": "TargetLeaves" },
+        { "name": "RouteDocuments", "pattern": "documents", "target": "TargetDocuments" },
+        { "name": "RouteEmployeeDashboard", "pattern": "employee-portal", "target": "TargetEmployeeDashboard" },
+        { "name": "RouteProfile", "pattern": "employee/profile", "target": "TargetProfile" },
+        { "name": "RouteTasks", "pattern": "tasks", "target": "TargetTasks" },
+        { "name": "RouteEmpAttendance", "pattern": "empattendance", "target": "TargetEmpAttendance" },
+        { "name": "RouteEmpDocuments", "pattern": "empdocuments", "target": "TargetEmpDocuments" }
       ],
       "targets": {
-        "TargetLogin": {
-          "viewName": "Login",
-          "viewLevel": 0
-        },
-        "TargetDashboard": {
-          "viewName": "Dashboard",
-          "viewLevel": 1
-        },
-        "TargetEmployees": {
-          "viewName": "Employees",
-          "viewLevel": 2
-        },
-        "TargetAttendance": {
-          "viewName": "Attendance",
-          "viewLevel": 3
-        },
-        "TargetLeaves": {
-          "viewName": "Leave",
-          "viewLevel": 4
-        },
-        "TargetDocuments": {
-          "viewName": "Documents",
-          "viewLevel": 5
-        },
-        "TargetEmployeeDashboard": {
-          "viewName": "EmployeeDashboard",
-          "viewLevel": 1
-        },
-        "TargetProfile": {
-        "viewName": "Profile",
-        "viewLevel": 2
-        },
-        "TargetAttendance": {
-        "viewName": "EmpAttendance",
-        "viewLevel": 3
-       },
-       "TargetTasks": {
-        "viewName": "EmpTasks",
-        "viewLevel": 4
-       },
-       "TargetDocuments": {
-        "viewName": "EmpDocuments",
-        "viewLevel": 5
-      }
+        "TargetLogin": { "viewName": "Login", "viewLevel": 0 },
+        "TargetDashboard": { "viewName": "Dashboard", "viewLevel": 1 },
+        "TargetEmployees": { "viewName": "Employees", "viewLevel": 2 },
+        "TargetAttendance": { "viewName": "Attendance", "viewLevel": 3 },
+        "TargetLeaves": { "viewName": "Leave", "viewLevel": 4 },
+        "TargetDocuments": { "viewName": "Documents", "viewLevel": 5 },
+        "TargetEmployeeDashboard": { "viewName": "EmployeeDashboard", "viewLevel": 1 },
+        "TargetProfile": { "viewName": "Profile", "viewLevel": 2 },
+        "TargetTasks": { "viewName": "EmpTasks", "viewLevel": 4 },
+        "TargetEmpAttendance": { "viewName": "EmpAttendance", "viewLevel": 3 },
+        "TargetEmpDocuments": { "viewName": "EmpDocuments", "viewLevel": 5 }
       }
     }
   }

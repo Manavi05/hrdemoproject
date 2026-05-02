@@ -1,52 +1,48 @@
-<mvc:View
-    controllerName="com.hr.portal.controller.Employees"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <Page title="Employee Directory" backgroundDesign="Transparent" showHeader="false">
+<mvc:View controllerName="com.hr.portal.controller.Employees"
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core">
+    <Page showHeader="false" backgroundDesign="Standard">
         <content>
-            <VBox class="sapUiMediumMargin">
-                <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+            <VBox class="sapUiSmallMargin">
+                <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
                     <VBox>
                         <Title text="Employee Directory" level="H1" titleStyle="H3" />
-                        <Text text="Manage your organization's workforce" class="subText" />
+                        <Text text="Manage your organization's workforce" color="Secondary" />
                     </VBox>
-                    <HBox gap="10px">
-                        <Button text="Bulk Upload" icon="sap-icon://upload" />
-                        <Button text="Add Employee" icon="sap-icon://add" type="Emphasized" class="btnAddEmployee" />
+                    <HBox>
+                        <Button text="Add Employee" icon="sap-icon://add" type="Emphasized" press="onAddEmployeePress" />
                     </HBox>
                 </HBox>
 
-                <VBox class="customCard sapUiSmallMarginBottom" style="padding: 1rem;">
-                    <HBox justifyContent="SpaceBetween" alignItems="Center">
-                        <SearchField placeholder="Search by name, ID, or email..." width="400px" />
-                        <Select width="200px">
-                            <core:Item key="all" text="All Departments" />
-                        </Select>
-                    </HBox>
-                </VBox>
+                <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+                    <SearchField placeholder="Search by name, ID, or email..." width="400px" class="sapUiSmallMarginEnd" />
+                    <Select width="250px" selectedKey="All">
+                        <core:Item key="All" text="All Departments" />
+                    </Select>
+                </HBox>
 
-                <Table items="{/Employees}" class="customCard">
+                <Table id="employeeTable" items="{/EmployeesSet}" class="sapUiResponsiveMargin customTable">
                     <columns>
-                        <Column><Text text="ID" /></Column>
-                        <Column><Text text="Employee" /></Column>
-                        <Column><Text text="Role" /></Column>
-                        <Column><Text text="Department" /></Column>
-                        <Column><Text text="Status" /></Column>
-                        <Column hAlign="End"><Text text="" /></Column>
+                        <Column width="10%"><Text text="ID" /></Column>
+                        <Column width="15%"><Text text="Employee" /></Column>
+                        <Column width="20%"><Text text="Email" /></Column>
+                        <Column width="15%"><Text text="Role" /></Column>
+                        <Column width="15%"><Text text="Department" /></Column>
+                        <Column width="15%"><Text text="Status" /></Column>
+                        <Column hAlign="End" width="10%"><Text text="Actions" /></Column>
                     </columns>
                     <items>
                         <ColumnListItem vAlign="Middle">
                             <cells>
-                                <Text text="{ID}" class="boldText" />
-                                <HBox alignItems="Center">
-                                    <Avatar src="{Icon}" displaySize="XS" class="sapUiTinyMarginEnd" />
-                                    <Text text="{Name}" class="boldText" />
-                                </HBox>
-                                <Text text="{Role}" class="subText" />
-                                <ObjectStatus text="{Dept}" class="deptBadge" />
-                                <ObjectStatus text="{Status}" state="{State}" inverted="true" class="statusBadge" />
-                                <Button icon="sap-icon://overflow" type="Transparent" />
+                                <Text text="{EMP_ID}" font="Bold" />
+                                <Text text="{EMP_NAME}" font="Bold" />
+                                <Text text="{EMAIL}" />
+                                <Text text="{ROLE}" />
+                                <Text text="{DEPARTMENT}" />
+                                <ObjectStatus 
+                                    text="{STATUS}" 
+                                    state="{= ${STATUS} === 'Active' ? 'Success' : (${STATUS} === 'On Leave' ? 'Warning' : 'Error') }"
+                                    inverted="true" />
+                                <Button icon="sap-icon://edit" type="Transparent" press="onEditEmployeePress" />
                             </cells>
                         </ColumnListItem>
                     </items>
